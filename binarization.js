@@ -1,24 +1,24 @@
 
 /**
- * 2’l‰»
+ * 2å€¤åŒ–
  */
 function Binarization(objTh) {
-    var width = 256; // ‰¡•256ƒsƒNƒZƒ‹
-    var height = 256; // c•256ƒsƒNƒZƒ‹
+    var width = 256;
+    var height = 256;
     var canvas = document.getElementById("myCanvas");
     var context = canvas.getContext("2d");
     var imgObj = new Image(width, height);
     imgObj.src = "http://jstap.web.fc2.com/test/html5/binarization/lena.png";
     context.drawImage(imgObj, 0, 0);
 
-    /* ƒOƒŒ[ƒXƒP[ƒ‹‚É•ÏŠ·‚·‚é */
+    /* ã‚°ãƒ¬ãƒ¼ã‚¹ã‚±ãƒ¼ãƒ« */
     var grayImage = ToGrayscale(canvas, height, width);
     var th = objTh.threshold.value * 1;
 
-    /* 2’l‰»‚ğs‚¤ */
+    /* 2å€¤åŒ– */
     var binaryImage = ToBinary(grayImage, height, width, th);
 
-    /* ƒZƒbƒg */
+    /* canvasã«è¡¨ç¤º */
     for (var y = 0; y < height; y++) {
         for (var x = 0; x < width; x++) {
             var I = binaryImage[y * width + x];
@@ -28,28 +28,27 @@ function Binarization(objTh) {
 }
 
 /**
- * ”»•Ê•ªÍ–@
+ * åˆ¤åˆ¥åˆ†ææ³•ã«ã‚ˆã‚‹2å€¤åŒ–
  */
 function DiscriminantAnalysisMethod(objTh) {
-    var width = 256; // ‰¡•256ƒsƒNƒZƒ‹
-    var height = 256; // c•256ƒsƒNƒZƒ‹
+    var width = 256;
+    var height = 256;
     var canvas = document.getElementById("myCanvas");
     var context = canvas.getContext("2d");
     var imgObj = new Image(width, height);
     imgObj.src = "http://jstap.web.fc2.com/test/html5/binarization/lena.png";
-    // imgObj.src = "http://jstap.web.fc2.com/test/html5/binarization/baboon.jpg";
     context.drawImage(imgObj, 0, 0);
 
-    /* ƒOƒŒ[ƒXƒP[ƒ‹‚É•ÏŠ·‚·‚é */
+    /* ã‚°ãƒ¬ãƒ¼ã‚¹ã‚±ãƒ¼ãƒ« */
     var grayImage = ToGrayscale(canvas, height, width);
 
-    /* ”»•Ê•ªÍ–@‚É‚æ‚é‚µ‚«‚¢’l‚Ìæ“¾ */
+    /* åˆ¤åˆ¥åˆ†ææ³•ã«ã‚ˆã‚‹ã—ãã„å€¤ã®å–å¾— */
     var th = GetThreshold(grayImage, height, width);
 
-    /* 2’l‰»‚ğs‚¤ */
+    /* 2å€¤åŒ– */
     var binaryImage = ToBinary(grayImage, height, width, th);
 
-    /* ƒZƒbƒg */
+    /* canvasã«è¡¨ç¤º */
     for (var y = 0; y < height; y++) {
         for (var x = 0; x < width; x++) {
             var I = binaryImage[y * width + x];
@@ -60,17 +59,17 @@ function DiscriminantAnalysisMethod(objTh) {
 }
 
 /**
- * ”»•Ê•ªÍ–@‚ğ—p‚¢‚Ä‚µ‚«‚¢’l‚ğæ“¾‚·‚é
+ * åˆ¤åˆ¥åˆ†ææ³•ã‚’ç”¨ã„ã¦ã—ãã„å€¤ã‚’å–å¾—ã™ã‚‹
  */
 function GetThreshold(image, height, width) {
-    var devZeroGuard = 0.00000001; // ƒ[ƒœZ–h~—p
+    var devZeroGuard = 0.00000001; // ã‚¼ãƒ­é™¤ç®—é˜²æ­¢ç”¨
     var best_t = 0;
     var max = 0;
 
     for (var t = 1; t < 255; t++) {
-        var sum1 = 0, sum2 = 0; // ˜a
-        var sqsum1 = 0, sqsum2 = 0; // •½•û˜a
-        var n1 = 0, n2 = 0; // ƒNƒ‰ƒX“à—v‘f”
+        var sum1 = 0, sum2 = 0; // å’Œ
+        var sqsum1 = 0, sqsum2 = 0; // å¹³æ–¹å’Œ
+        var n1 = 0, n2 = 0;
         var n = height * width;
 
         for(var y = 0; y < height; y++){
@@ -89,21 +88,16 @@ function GetThreshold(image, height, width) {
             }
         }
 
-        /* •½‹Ï */
         var m1 = sum1 / (n1 + devZeroGuard);
         var m2 = sum2 / (n2 + devZeroGuard);
 
-        /* •ªU */
         var var1 = sqsum1 / (n1 + devZeroGuard) - m1^2;
         var var2 = sqsum2 / (n2 + devZeroGuard) - m2^2;
 
-        /* ƒNƒ‰ƒXŠÔ•ªU‚ğ‹‚ß‚é */
         var Sb = (n1 * n2 * (m1 - m2)^2) / n^2;
 
-        /* ƒNƒ‰ƒX“à•ªU */
         var Sw = ((n1 * var1) / n) + ((n2 * var2) / n);
 
-        /* ”»•ÊŠÖ” */
         var J = Sb / Sw;
         if ( J > max) {
             max = J;
@@ -115,14 +109,14 @@ function GetThreshold(image, height, width) {
 }
 
 /**
- * RBG‚ğƒOƒŒ[ƒXƒP[ƒ‹‚É‚µ‚Ä•Ô‚·‚é
+ * ã‚°ãƒ¬ãƒ¼ã‚¹ã‚±ãƒ¼ãƒ«
  */
 function ToGrayscale(canvas, height, width) {
     var grayImage = new Array(width * height);
 
     for(var y = 0; y < height; y++){
         for(var x = 0; x < width; x++){
-            var pixelData = getPixel(canvas, x, y); // ƒsƒNƒZƒ‹’l‚ğæ“¾‚·‚é
+            var pixelData = getPixel(canvas, x, y);
             var R = pixelData.R;
             var G = pixelData.G;
             var B = pixelData.B;
@@ -131,7 +125,6 @@ function ToGrayscale(canvas, height, width) {
             G = Math.floor(G * 0.587);
             B = Math.floor(B * 0.114);
 
-            // ƒOƒŒ[ƒXƒP[ƒ‹‰»
             grayImage[y * width + x] = R + G + B;
         }
     }
@@ -140,7 +133,7 @@ function ToGrayscale(canvas, height, width) {
 }
 
 /**
- * 2’l‰»‚ğs‚¤
+ * 2å€¤åŒ–
  */
 function ToBinary(image, height, width, threshold) {
     var binaryImage = new Array(height * width);
@@ -158,12 +151,10 @@ function ToBinary(image, height, width, threshold) {
     return binaryImage;
 }
 
-// GetPixel
-// –ß‚è’l‚ÍƒIƒuƒWƒFƒNƒg‚ÌƒvƒƒpƒeƒB‚ÅR,G,B
 function getPixel(srcCanvas, x, y){
     if (window.opera) {
         var gContext = srcCanvas.getContext("opera-2dgame");
-        var rgbStr = gContext.getPixel(x, y); // ƒsƒNƒZƒ‹’l‚ğæ“¾‚·‚é
+        var rgbStr = gContext.getPixel(x, y); // ?s?N?Z???l???æ“¾????
         var R = eval("0x"+rgbStr.substring(1,3));
         var G = eval("0x"+rgbStr.substring(3,5));
         var B = eval("0x"+rgbStr.substring(5,7));

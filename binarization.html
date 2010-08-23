@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=shift_JIS">
+		<title>JSTAP - HTML5による画像の2値化</title>
+		<link rel="stylesheet" href="../../../css/screen.css" type="text/css" media="all">
+		<link rel="stylesheet" href="../../../css/slider.css" type="text/css" media="all">
+
+		<script type="text/javascript" src="./binarization.js"></script>
+		<script type="text/javascript" src="./discriminant-analysis-method.js"></script>
+		<script type="text/javascript" src="../../../js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="../../../js/jquery-ui-1.8.2.custom.min.js"></script>
+		<script type="text/javascript" src="../../../js/slider.js"></script>
+		<script type="text/javascript">
+			//<![CDATA[
+			// Disable the mouseWheel support for all sliders on the page
+			fdSliderController.disableMouseWheel();
+			//]]>
+		</script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="header"></div>
+
+			<!--menu start-->
+			<div id="topic-path">
+				<p><a href="http://jstap.web.fc2.com">Top</a> &gt; <a href="../html5.html">HTML5</a> &gt; <a href="#">Binarization</a></p>
+			</div>
+
+			<a name="main"></a>
+
+			<!--contents start-->
+			<div id="contents">
+				<h2><a name="jump01"></a>HTML5@Binarization</h2>
+
+				<div id="image-area">
+					<p><b>オリジナル画像</b></p>
+					<img src="./lena.png"></img>
+					<!-- <img src="./baboon.jpg"></img> -->
+
+					<br>
+					<form>
+						<!-- <input name="slider1" id="slider" type="text" title="Range: 0 - 255" class="fd_range_0_255 fd_classname_extraclass fd_callback_updateColor" value="128" /> -->
+
+						<p>しきい値:<input type="text" size=10 name="threshold" id="threshold" /><input type="button" name="binary1" value="2値化" onClick="Binarization(this.form)" /></p>
+						<input type="button" name="binary2" value="判別分析法" onClick="DiscriminantAnalysisMethod(this.form)" />
+						
+					</form>
+					<br>
+					<p><b>2値化画像</b></p>
+					<img src="./lena.png" style="display: none">
+					<canvas id="myCanvas" width="256" height="256">canvasに対応したブラウザーで実行してください</canvas>
+				</div>
+				<!-- image-area end -->
+			</div>
+
+		</div>
+		<!--contents end-->
+
+		<div id="footer">
+			<hr />
+			<p>
+			&copy; Copyright 2008,
+			<a href="index.html">JSTAP</a>
+			- Created by
+			<a href="mailto:kojo.sugita@gmail.com">Kojo Sugita</a>
+			</p>
+		</div>
+		<!-- footer end-->
+	</div>
+	<!--wrap end-->
+
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-5663763-3");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+
+</body>
+</html>

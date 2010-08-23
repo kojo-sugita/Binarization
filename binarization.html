@@ -1,85 +1,56 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=shift_JIS">
-		<title>JSTAP - HTML5‚É‚æ‚é‰æ‘œ‚Ì2’l‰»</title>
-		<link rel="stylesheet" href="../../../css/screen.css" type="text/css" media="all">
-		<link rel="stylesheet" href="../../../css/slider.css" type="text/css" media="all">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>JSTAP - HTML5ã«ã‚ˆã‚‹2å€¤åŒ–</title>
+    <link rel="stylesheet" href="../../../css/screen.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../../../css/slider.css" type="text/css" media="all">
+    <script type="text/javascript" src="./binarization.js"></script>
+  </head>
 
-		<script type="text/javascript" src="./binarization.js"></script>
-		<script type="text/javascript" src="./discriminant-analysis-method.js"></script>
-		<script type="text/javascript" src="../../../js/jquery-1.4.2.min.js"></script>
-		<script type="text/javascript" src="../../../js/jquery-ui-1.8.2.custom.min.js"></script>
-		<script type="text/javascript" src="../../../js/slider.js"></script>
-		<script type="text/javascript">
-			//<![CDATA[
-			// Disable the mouseWheel support for all sliders on the page
-			fdSliderController.disableMouseWheel();
-			//]]>
-		</script>
-	</head>
+  <body>
+    <div id="wrap">
+      <div id="header"></div>
 
-	<body>
-		<div id="wrap">
-			<div id="header"></div>
+      <!--menu start-->
+      <div id="topic-path">
+        <p><a href="http://jstap.web.fc2.com">Top</a> &gt; <a href="../html5.html">HTML5</a> &gt; <a href="#">Binarization</a></p>
+      </div>
 
-			<!--menu start-->
-			<div id="topic-path">
-				<p><a href="http://jstap.web.fc2.com">Top</a> &gt; <a href="../html5.html">HTML5</a> &gt; <a href="#">Binarization</a></p>
-			</div>
+      <a name="main"></a>
 
-			<a name="main"></a>
+      <!--contents start-->
+      <div id="contents">
+        <h2><a name="jump01"></a>HTML5@Binarization</h2>
 
-			<!--contents start-->
-			<div id="contents">
-				<h2><a name="jump01"></a>HTML5@Binarization</h2>
+        <div id="image-area">
+          <p><b>ã‚ªãƒªã‚¸ãƒŠãƒ«ç”»åƒ</b></p>
+          <img src="./lena.png"></img>
+          <br />
+          <form>
+            <p>ã—ãã„å€¤:<input type="text" size=10 name="threshold" id="threshold" /><input type="button" name="binary1" value="2å€¤åŒ–" onClick="Binarization(this.form)" /></p>
+            <input type="button" name="binary2" value="åˆ¤åˆ¥åˆ†ææ³•" onClick="DiscriminantAnalysisMethod(this.form)" />
+          </form>
+          <br>
+          <p><b>2å€¤åŒ–ç”»åƒ</b></p>
+          <img src="./lena.png" style="display: none">
+          <canvas id="myCanvas" width="256" height="256">canvasã«å¯¾å¿œã—ã¦ã„ãªã„</canvas>
+        </div>
+        <!-- image-area end -->
+      </div>
+      <!--contents end-->
 
-				<div id="image-area">
-					<p><b>ƒIƒŠƒWƒiƒ‹‰æ‘œ</b></p>
-					<img src="./lena.png"></img>
-					<!-- <img src="./baboon.jpg"></img> -->
+      <div id="footer">
+        <hr />
+        <p>
+        &copy; Copyright 2008,
+        <a href="index.html">JSTAP</a>
+        - Created by
+        <a href="mailto:kojo.sugita@gmail.com">Kojo Sugita</a>
+        </p>
+      </div>
+      <!-- footer end-->
+    </div>
 
-					<br>
-					<form>
-						<!-- <input name="slider1" id="slider" type="text" title="Range: 0 - 255" class="fd_range_0_255 fd_classname_extraclass fd_callback_updateColor" value="128" /> -->
-
-						<p>‚µ‚«‚¢’l:<input type="text" size=10 name="threshold" id="threshold" /><input type="button" name="binary1" value="2’l‰»" onClick="Binarization(this.form)" /></p>
-						<input type="button" name="binary2" value="”»•Ê•ªÍ–@" onClick="DiscriminantAnalysisMethod(this.form)" />
-						
-					</form>
-					<br>
-					<p><b>2’l‰»‰æ‘œ</b></p>
-					<img src="./lena.png" style="display: none">
-					<canvas id="myCanvas" width="256" height="256">canvas‚É‘Î‰‚µ‚½ƒuƒ‰ƒEƒU[‚ÅÀs‚µ‚Ä‚­‚¾‚³‚¢</canvas>
-				</div>
-				<!-- image-area end -->
-			</div>
-
-		</div>
-		<!--contents end-->
-
-		<div id="footer">
-			<hr />
-			<p>
-			&copy; Copyright 2008,
-			<a href="index.html">JSTAP</a>
-			- Created by
-			<a href="mailto:kojo.sugita@gmail.com">Kojo Sugita</a>
-			</p>
-		</div>
-		<!-- footer end-->
-	</div>
-	<!--wrap end-->
-
-	<script type="text/javascript">
-		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">
-		try {
-			var pageTracker = _gat._getTracker("UA-5663763-3");
-			pageTracker._trackPageview();
-		} catch(err) {}</script>
-
-</body>
+  </body>
 </html>

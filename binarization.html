@@ -5,7 +5,10 @@
     <title>JSTAP - HTML5による2値化</title>
     <link rel="stylesheet" href="../../../css/screen.css" type="text/css" media="all">
     <link rel="stylesheet" href="../../../css/slider.css" type="text/css" media="all">
-    <script type="text/javascript" src="./binarization.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+    <script type="text/javascript" src="./ImageLoader.js"></script>
+    <script type="text/javascript" src="./IplImage.js"></script>
+    <script type="text/javascript" src="./Binarization.js"></script>
   </head>
 
   <body>
@@ -28,13 +31,13 @@
           <img src="./lena.png"></img>
           <br />
           <form>
-            <p>しきい値:<input type="text" size=10 name="threshold" id="threshold" /><input type="button" name="binary1" value="2値化" onClick="Binarization(this.form)" /></p>
-            <input type="button" name="binary2" value="判別分析法" onClick="DiscriminantAnalysisMethod(this.form)" />
+            <p>しきい値: <input type="range" name="threshold" id="threshold" step="1" min="0" max="255" onchange="goBinarization(this.value);"></p>
+            <input type="button" name="binary2" value="判別分析法" onClick="goAutoBinarization(this.form)" />
+            <br>
+            <p><b>2値化画像</b></p>
+            <img src="./lena.png" id="image"  style="display: none" onload="goBinarization(this.value)";>
+            <canvas id="myCanvas" width="256" height="256">canvasに対応していない</canvas>
           </form>
-          <br>
-          <p><b>2値化画像</b></p>
-          <img src="./lena.png" style="display: none">
-          <canvas id="myCanvas" width="256" height="256">canvasに対応していない</canvas>
         </div>
         <!-- image-area end -->
       </div>
@@ -54,3 +57,4 @@
 
   </body>
 </html>
+

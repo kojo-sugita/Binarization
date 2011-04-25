@@ -31,11 +31,11 @@
           <img src="./lena.png"></img>
           <br />
           <form>
-            <p>しきい値: <input type="range" name="threshold" id="threshold" step="1" min="0" max="255" onchange="goBinarization(this.value);"></p>
+            <p>しきい値: <input type="range" name="threshold" id="threshold" step="1" min="0" max="255" onchange="goBinarization(this.value);" /></p>
             <input type="button" name="binary2" value="判別分析法" onClick="goAutoBinarization(this.form)" />
             <br>
             <p><b>2値化画像</b></p>
-            <img src="./lena.png" id="image"  style="display: none" onload="goBinarization(this.value)";>
+            <img src="./lena.png" id="image"  style="display: none" onload="goBinarization(this.value)"; />
             <canvas id="myCanvas" width="256" height="256">canvasに対応していない</canvas>
           </form>
         </div>
